@@ -170,9 +170,15 @@
 
             </LinearLayout>
             <!-- Clear data and install location buttons  -->
+            <Button android:id="@+id/data_buttons_panel"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/info_size"
+                android:layout_width="150dip"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
             <include
                 layout="@layout/two_buttons_panel"
-                android:id="@+id/data_buttons_panel"/>
+                android:id="@+id/move_buttons_panel"/>
 
         </LinearLayout>
 

@@ -100,7 +100,8 @@ public class InstalledAppDetails extends Activity
     private ClearCacheObserver mClearCacheObserver;
     private Button mForceStopButton;
     private Button mClearDataButton;
-    private Button mMoveAppButton;
+    private Button mMoveAppButtonL;
+    private Button mMoveAppButtonR;
     private int mMoveErrorCode;
     
     private PackageMoveObserver mPackageMoveObserver;
@@ -134,6 +135,8 @@ public class InstalledAppDetails extends Activity
     private static final int DLG_CANNOT_CLEAR_DATA = DLG_BASE + 4;
     private static final int DLG_FORCE_STOP = DLG_BASE + 5;
     private static final int DLG_MOVE_FAILED = DLG_BASE + 6;
+
+    private boolean MoveToSdExt = false;
     
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -224,29 +227,58 @@ public class InstalledAppDetails extends Activity
         return "";
     }
 
-    private void initMoveButton() {
+    private void initMoveButtonL() {
         boolean dataOnly = false;
         dataOnly = (mPackageInfo == null) && (mAppEntry != null);
         boolean moveDisable = true;
 
         if (dataOnly) {
-            mMoveAppButton.setText(R.string.move_app);
+            mMoveAppButtonL.setText(R.string.move_app);
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
-            mMoveAppButton.setText(R.string.move_app_to_internal);
+            mMoveAppButtonL.setText(R.string.move_app_to_internal);
             // Always let apps move to internal storage from sdcard.
             moveDisable = false;
         } else {
-            mMoveAppButton.setText(R.string.move_app_to_sdcard);
+            mMoveAppButtonL.setText(R.string.move_app_to_sdcard);
             mCanBeOnSdCardChecker.init();
             moveDisable = !mCanBeOnSdCardChecker.check(mAppEntry.info);
         }
         boolean allowMoveAllApps = android.provider.Settings.Secure.getInt(getContentResolver(),
                 android.provider.Settings.Secure.ALLOW_MOVE_ALL_APPS_EXTERNAL, 1) == 1;
-        if (!allowMoveAllApps && moveDisable) {
-            mMoveAppButton.setEnabled(false);
+        if ((!allowMoveAllApps && moveDisable) || ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
+                                               || ((mAppEntry.info.flags & ApplicationInfo.FLAG_FORWARD_LOCK) != 0)) {
+            mMoveAppButtonL.setEnabled(false);
         } else {
-            mMoveAppButton.setOnClickListener(this);
-            mMoveAppButton.setEnabled(true);
+            mMoveAppButtonL.setOnClickListener(this);
+            mMoveAppButtonL.setEnabled(true);
+        }
+    }
+
+    private void initMoveButtonR() {
+        boolean dataOnly = false;
+        dataOnly = (mPackageInfo == null) && (mAppEntry != null);
+        boolean moveDisable = true;
+        if (dataOnly) {
+            mMoveAppButtonR.setText(R.string.move_app);
+        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 ||
+                   ((mAppEntry.info.flags & ApplicationInfo.FLAG_SDEXT_STORAGE) == 0 )) {
+            mMoveAppButtonR.setText(R.string.move_app_to_sdext);
+            if (android.os.Environment.IsSdExtMounted()) {
+                moveDisable = false;
+                MoveToSdExt = true;
+            }
+        } else {
+            mMoveAppButtonR.setText(R.string.move_app_to_internal);
+            moveDisable = false;
+            MoveToSdExt = false;
+        }
+
+        if ((moveDisable) || ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
+                          || ((mAppEntry.info.flags & ApplicationInfo.FLAG_FORWARD_LOCK) != 0)) {
+            mMoveAppButtonR.setEnabled(false);
+        } else {
+            mMoveAppButtonR.setOnClickListener(this);
+            mMoveAppButtonR.setEnabled(true);
         }
     }
 
@@ -325,9 +357,10 @@ public class InstalledAppDetails extends Activity
         mForceStopButton.setEnabled(false);
         
         // Initialize clear data and move install location buttons
-        View data_buttons_panel = findViewById(R.id.data_buttons_panel);
-        mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.left_button);
-        mMoveAppButton = (Button) data_buttons_panel.findViewById(R.id.right_button);
+        mClearDataButton = (Button) findViewById(R.id.data_buttons_panel);
+        View move_buttons_panel = findViewById(R.id.move_buttons_panel);
+        mMoveAppButtonL = (Button) move_buttons_panel.findViewById(R.id.left_button);
+        mMoveAppButtonR = (Button) move_buttons_panel.findViewById(R.id.right_button);
         
         // Cache section
         mCacheSize = (TextView) findViewById(R.id.cache_size_text);
@@ -559,10 +592,13 @@ public class InstalledAppDetails extends Activity
         if (!mMoveInProgress) {
             initUninstallButtons();
             initDataButtons();
-            initMoveButton();
+            initMoveButtonL();
+            initMoveButtonR();
         } else {
-            mMoveAppButton.setText(R.string.moving);
-            mMoveAppButton.setEnabled(false);
+            mMoveAppButtonL.setText(R.string.moving);
+            mMoveAppButtonL.setEnabled(false);
+            mMoveAppButtonR.setText(R.string.moving);
+            mMoveAppButtonR.setEnabled(false);
             mUninstallButton.setEnabled(false);
         }
     }
@@ -792,7 +828,7 @@ public class InstalledAppDetails extends Activity
         } else if (v == mForceStopButton) {
             showDialogInner(DLG_FORCE_STOP);
             //forceStopPackage(mAppInfo.packageName);
-        } else if (v == mMoveAppButton) {
+        } else if (v == mMoveAppButtonL) {
             if (mPackageMoveObserver == null) {
                 mPackageMoveObserver = new PackageMoveObserver();
             }
@@ -801,6 +837,16 @@ public class InstalledAppDetails extends Activity
             mMoveInProgress = true;
             refreshButtons();
             mPm.movePackage(mAppEntry.info.packageName, mPackageMoveObserver, moveFlags);
+        } else if (v == mMoveAppButtonR) {
+            if (mPackageMoveObserver == null) {
+                mPackageMoveObserver = new PackageMoveObserver();
+            }
+
+        mMoveInProgress = true;
+        refreshButtons();
+        mPm.movePackage(mAppEntry.info.packageName,
+                        mPackageMoveObserver,
+                        MoveToSdExt ? PackageManager.MOVE_SDEXT : PackageManager.MOVE_INTERNAL);
         }
     }
 }

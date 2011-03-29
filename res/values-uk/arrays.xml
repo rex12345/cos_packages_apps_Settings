@@ -160,6 +160,7 @@
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"Внутрішня пам\'ять пристрою"</item>
     <item msgid="3738430123799803530">"Знімна карта SD"</item>
+    <item msgid="8651707593222110014">"sd-ext"</item>
     <item msgid="4498124044785815005">"Дозвольте виріш. системі"</item>
   </string-array>
   <string-array name="vibrate_entries">

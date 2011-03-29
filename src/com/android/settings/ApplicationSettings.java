@@ -39,10 +39,12 @@ public class ApplicationSettings extends PreferenceActivity implements
     private static final int APP_INSTALL_AUTO = 0;
     private static final int APP_INSTALL_DEVICE = 1;
     private static final int APP_INSTALL_SDCARD = 2;
+    private static final int APP_INSTALL_SDEXT = 3;
     
     private static final String APP_INSTALL_DEVICE_ID = "device";
     private static final String APP_INSTALL_SDCARD_ID = "sdcard";
     private static final String APP_INSTALL_AUTO_ID = "auto";
+    private static final String APP_INSTALL_SDEXT_ID = "sdext";
     
     private CheckBoxPreference mToggleAppInstallation;
 
@@ -87,6 +89,10 @@ public class ApplicationSettings extends PreferenceActivity implements
         if(APP_INSTALL_DEVICE_ID.equals(value)) {
             Settings.System.putInt(getContentResolver(),
                     Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_DEVICE);
+        } else if ((APP_INSTALL_SDEXT_ID.equals(value)) &&
+                   (android.os.Environment.IsSdExtMounted())) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_SDEXT);
         } else if (APP_INSTALL_SDCARD_ID.equals(value)) {
             Settings.System.putInt(getContentResolver(),
                     Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_SDCARD);
@@ -146,6 +152,8 @@ public class ApplicationSettings extends PreferenceActivity implements
                 Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
         if (selectedLocation == APP_INSTALL_DEVICE) {
             return APP_INSTALL_DEVICE_ID;
+        } else if (selectedLocation == APP_INSTALL_SDEXT) {
+            return APP_INSTALL_SDEXT_ID;
         } else if (selectedLocation == APP_INSTALL_SDCARD) {
             return APP_INSTALL_SDCARD_ID;
         } else  if (selectedLocation == APP_INSTALL_AUTO) {
