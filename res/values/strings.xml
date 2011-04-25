@@ -1751,6 +1751,11 @@
  from unknown sources. You agree that you are solely responsible for any
  damage to your phone or loss of data that may result from using
  these applications.</string>
+    <!--zswap settings-->
+    <string name="zswap_appram_enable">CompCache</string>
+    <string name="zswap_appram_off">Enable 18Mb CompCache</string>
+    <!-- the * will be replaced by the number of Mb-->
+    <string name="zswap_appram_on">Disable *Mb CompCache</string>
     <!-- Manage applications, individual application info screen title. For example, if they click on "Browser" in "Manage applications", the title of the next screen will be this -->
     <string name="application_info_label">Application info</string>
     <!-- Manage applications, individual application info screen, section heading for stuff relating to an app's storage settings. -->

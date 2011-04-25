@@ -27,11 +27,14 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
+import android.os.SystemProperties;
+import android.util.Log;
 
 public class ApplicationSettings extends PreferenceActivity implements
         DialogInterface.OnClickListener {
     
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
+    private static final String KEY_TOGGLE_ZSWAP_APPRAM = "toggle_zswap_appram";
     private static final String KEY_APP_INSTALL_LOCATION = "app_install_location";
     private static final String KEY_QUICK_LAUNCH = "quick_launch";
 
@@ -47,6 +50,9 @@ public class ApplicationSettings extends PreferenceActivity implements
     private static final String APP_INSTALL_SDEXT_ID = "sdext";
     
     private CheckBoxPreference mToggleAppInstallation;
+    private CheckBoxPreference mToggleZSwapAppRam;
+
+    private String mZSwapSummaryOn = null;
 
     private ListPreference mInstallLocation;
 
@@ -59,7 +65,11 @@ public class ApplicationSettings extends PreferenceActivity implements
         addPreferencesFromResource(R.xml.application_settings);
 
         mToggleAppInstallation = (CheckBoxPreference) findPreference(KEY_TOGGLE_INSTALL_APPLICATIONS);
+        mToggleZSwapAppRam = (CheckBoxPreference) findPreference(KEY_TOGGLE_ZSWAP_APPRAM);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
+        mToggleZSwapAppRam.setChecked(
+                     Settings.Secure.getInt(getContentResolver(),
+                     Settings.Secure.ZRAM_SIZE, 0)>0);
 
         mInstallLocation = (ListPreference) findPreference(KEY_APP_INSTALL_LOCATION);
         // Is app default install location set?
@@ -77,14 +87,49 @@ public class ApplicationSettings extends PreferenceActivity implements
                 }
             });
         }
-
+        if(SystemProperties.get("status.zram.device.exists","0").equals("0")){
+            //if zram is missing don't show the option to the user
+            getPreferenceScreen().removePreference(mToggleZSwapAppRam);
+        }
+        else{
+            updateZRamSize();
+            mToggleZSwapAppRam.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if((Boolean)newValue){
+                        Log.i("Settings","Set Compcache to 18Mb");
+                        Settings.Secure.putInt(getContentResolver(), Settings.Secure.ZRAM_SIZE, 18);
+                        updateZRamSize();
+                    } else {
+                        Log.i("Settings","Disable Compcache");
+                        Settings.Secure.putInt(getContentResolver(), Settings.Secure.ZRAM_SIZE, 0);
+                    }
+                    return true;
+                }
+            });
+        }
         if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_NOKEYS) {
             // No hard keyboard, remove the setting for quick launch
             Preference quickLaunchSetting = findPreference(KEY_QUICK_LAUNCH);
             getPreferenceScreen().removePreference(quickLaunchSetting);
         }
     }
-
+    private void updateZRamSize() {
+        String size=Integer.toString(
+                        Settings.Secure.getInt(getContentResolver(),
+                        Settings.Secure.ZRAM_SIZE, 0));
+        if(mZSwapSummaryOn == null){
+            mZSwapSummaryOn=mToggleZSwapAppRam.getSummaryOn().toString();
+        }
+        int idx = mZSwapSummaryOn.indexOf('*');
+        try{
+            mToggleZSwapAppRam.setSummaryOn(mZSwapSummaryOn.substring(0,idx) 
+                                         + size +
+                                         mZSwapSummaryOn.substring(idx+1));
+        }
+        catch(java.lang.StringIndexOutOfBoundsException e){
+            Log.e("Settings","String missing '*' excape: " + mZSwapSummaryOn);
+        }
+    }
     protected void handleUpdateAppInstallLocation(final String value) {
         if(APP_INSTALL_DEVICE_ID.equals(value)) {
             Settings.System.putInt(getContentResolver(),
@@ -125,7 +170,6 @@ public class ApplicationSettings extends PreferenceActivity implements
                 setNonMarketAppsAllowed(false);
             }
         }
-
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
