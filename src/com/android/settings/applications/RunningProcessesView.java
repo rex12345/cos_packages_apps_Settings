@@ -333,10 +333,19 @@ public class RunningProcessesView extends FrameLayout
     }
     
     private long readAvailMem() {
+        //try to read /sys/module/lowmemorykiller/parameters/minfree_stat
+        //and use other_free + other_file as "free ram" 
+        //if we can't find that file MemFree + Cached from /proc/meminfo
+        //is the fallback
         try {
-            long memFree = 0;
-            long memCached = 0;
-            FileInputStream is = new FileInputStream("/proc/meminfo");
+            long memFree = 0; //or other_free
+            long memCached = 0; //or other_file
+            FileInputStream is;
+            try{
+                is = new FileInputStream("/sys/module/lowmemorykiller/parameters/minfree_stat");
+            }catch (java.io.FileNotFoundException e) {
+                is = new FileInputStream("/proc/meminfo");
+            }
             int len = is.read(mBuffer);
             is.close();
             final int BUFLEN = mBuffer.length;
@@ -346,6 +355,12 @@ public class RunningProcessesView extends FrameLayout
                     memFree = extractMemValue(mBuffer, i);
                 } else if (matchText(mBuffer, i, "Cached")) {
                     i += 6;
+                    memCached = extractMemValue(mBuffer, i);
+                } else if (matchText(mBuffer, i, "other_free")) {
+                    i += 10;
+                    memFree = extractMemValue(mBuffer, i);
+                } else if (matchText(mBuffer, i, "other_file")) {
+                    i += 10;
                     memCached = extractMemValue(mBuffer, i);
                 }
                 while (i < BUFLEN && mBuffer[i] != '\n') {
