@@ -96,8 +96,8 @@ public class ApplicationSettings extends PreferenceActivity implements
             mToggleZSwapAppRam.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if((Boolean)newValue){
-                        Log.i("Settings","Set Compcache to 18Mb");
-                        Settings.Secure.putInt(getContentResolver(), Settings.Secure.ZRAM_SIZE, 18);
+                        Log.i("Settings","Set Compcache to 20Mb");
+                        Settings.Secure.putInt(getContentResolver(), Settings.Secure.ZRAM_SIZE, 20);
                         updateZRamSize();
                     } else {
                         Log.i("Settings","Disable Compcache");
