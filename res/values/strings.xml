@@ -1345,7 +1345,7 @@
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=30] -->
     <string name="sd_eject_summary" product="nosdcard">Unmount the internal USB storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
-    <string name="sd_eject_summary" product="default">Unmount the SD card so you can safely remove it</string>
+    <string name="sd_eject_summary" product="default">Unmount the SD card.\nDo not eject SD card!</string>
 
     <!-- SD card & phone storage settings item summary that is displayed when no SD card is inserted.  This version of the string can probably never come up on current hardware. [CHAR LIMIT=25] -->
     <string name="sd_insert_summary" product="nosdcard">Insert USB storage for mounting</string>
@@ -1380,7 +1380,7 @@
     <!-- SD card eject confirmation dialog  [CHAR LIMIT=NONE] -->
     <string name="dlg_confirm_unmount_text" product="nosdcard">If you unmount the USB storage, some applications you are using will stop and may be unavailable until you remount the USB storage.</string>
     <!-- SD card eject confirmation dialog  -->
-    <string name="dlg_confirm_unmount_text" product="default">If you unmount the SD card, some applications you are using will stop and may be unavailable until you remount the SD card.</string>
+    <string name="dlg_confirm_unmount_text" product="default">If you unmount the SD card, some applications you are using will stop and may be unavailable until you remount the SD card. If you have any applications on SD-Ext DO NOT eject the card</string>
     <!-- SD card eject error dialog title   [CHAR LIMIT=30] -->
     <string name="dlg_error_unmount_title" product="nosdcard">Unmounting USB storage failed</string>
     <!-- SD card eject error dialog title   -->
@@ -2164,7 +2164,6 @@ found in the list of installed applications.</string>
 
     <!-- Used to show an amount of time in the form "s seconds" in BatteryHistory -->
     <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g>s</string>
-<<<<<<< HEAD
 
     <!-- Used to head a list of packages that share a given user id BatteryHistory -->
     <string name="battery_history_packages_sharing_this_uid">Packages sharing this UID:</string>
@@ -2228,8 +2227,6 @@ found in the list of installed applications.</string>
 
     <!-- XXX remove? Used for Screen on time message in BatteryHistory -->
     <string name="battery_history_screen_on_plugged">Plugged in:</string>
-=======
->>>>>>> parent of 68f9795... Added cpu info and memory info to About Phone Settings page
     
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
@@ -2901,12 +2898,6 @@ found in the list of installed applications.</string>
     <string name="sound_category_calls_title">Incoming calls</string>
     <string name="sound_category_notification_title">Notifications</string>
     <string name="sound_category_feedback_title">Feedback</string>
-<<<<<<< HEAD
-=======
-
-    <string name="launcher_settings_title">ADWLauncher</string>
-    
->>>>>>> parent of 68f9795... Added cpu info and memory info to About Phone Settings page
     <string name="possibleButtons">Possible Buttons</string>
     <string name="toggleWifi">Wi-Fi</string>
     <string name="toggleWifiAp">Portable Wi-Fi hotspot</string>
@@ -2923,7 +2914,6 @@ found in the list of installed applications.</string>
     <string name="toggleFlashlight">Flashlight</string>
     <string name="toggleLockScreen">Lock Screen</string>
     <string name="toggleWimax">WiMAX</string>
-
     <string name="toggleWifiDescription">Enable/disable Wi-Fi</string>
     <string name="toggleWifiApDescription">Enable/disable the portable Wi-Fi hotspot</string>
     <string name="toggleBluetoothDescription">Enable/disable Bluetooth</string>
@@ -2938,20 +2928,12 @@ found in the list of installed applications.</string>
     <string name="toggleAirplaneDescription">Enable/disable airplane mode</string>
     <string name="toggleFlashlightDescription">Enable/disable flashlight mode</string>
     <string name="toggleLockScreenDescription">Enable/disable lock screen</string>
-<<<<<<< HEAD
     <string name="toggleWimaxDescription">Enable/disable WiMAX</string>
-
-=======
-
-    
->>>>>>> parent of 68f9795... Added cpu info and memory info to About Phone Settings page
     <string name="widgetSettings">Widget Instance Settings</string>
     <string name="wifiSettings">Wi-Fi Events settings</string>
     <string name="dataSettings">Data Events settings</string>
     <string name="powerSettings">Power Events settings</string>
-
     <string name="generalSettings">General Settings</string>
-
     <string name="autoDisable3G">Data disables 3G</string>
     <string name="autoEnable3G">Data enables 3G</string>
     <string name="autoDisable3GWithWifi">Wi-Fi disables 3G</string>
@@ -2964,17 +2946,9 @@ found in the list of installed applications.</string>
     <string name="ringModeVibrateAsOn">Vibrate as ON</string>
     <string name="monitorDataRoaming">Monitor Data Roaming</string>
     <string name="autoEnableBluetoothWithPower">Ext. PWR enables Bluetooth</string>
-<<<<<<< HEAD
     <string name="autoDisableBluetoothWithPower">Ext. PWR disables Bluetooth</string>
     <string name="autoEnableWifiWithPower">Ext. PWR enables Wi-Fi</string>
     <string name="autoDisableWifiWithPower">Ext. PWR disables Wi-Fi</string>
-
-=======
-    <string name="autoDisableBluetoothWithPower">Ext. PWD disables Bluetooth</string>
-    <string name="autoEnableWifiWithPower">Ext. PWD enables Wifi</string>
-    <string name="autoDisableWifiWithPower">Ext. PWD disables Wifi</string>
-  
->>>>>>> parent of 68f9795... Added cpu info and memory info to About Phone Settings page
     <string name="autoDisable3GDescription">2G when mobile data is disabled</string>
     <string name="autoEnable3GDescription">3G when mobile data is enabled</string>
     <string name="autoDisable3GWithWifiDescription">2G when Wi-Fi is enabled</string>
@@ -3004,9 +2978,7 @@ found in the list of installed applications.</string>
 
     <!-- Widget Picker -->
     <string name="widget_count">(%d widgets)</string>
-
     <string name="cm_settings_title">Cos settings</string>
-
     <string name="wimax_settings">4G settings</string>
     <string name="wimax_settings_summary">Set up &amp; manage 4G network and modem</string>
     <string name="status_wimax_mac_address">4G MAC address</string>
@@ -3015,4 +2987,5 @@ found in the list of installed applications.</string>
     from their cell phone carrier. The use of the string is similar to the string
     "system_update_settings_list_item_title" in this project. [CHAR LIMIT=25] -->
     <string name="additional_system_update_settings_list_item_title">Additional system updates</string>
+    <string name="sdext_memory">SD-Ext</string>
 </resources>
