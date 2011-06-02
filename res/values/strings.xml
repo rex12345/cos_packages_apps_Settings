@@ -2902,9 +2902,6 @@ found in the list of installed applications.</string>
     <string name="sound_category_calls_title">Incoming calls</string>
     <string name="sound_category_notification_title">Notifications</string>
     <string name="sound_category_feedback_title">Feedback</string>
-
-    <string name="launcher_settings_title">ADWLauncher</string>
-
     <string name="possibleButtons">Possible Buttons</string>
     <string name="toggleWifi">Wi-Fi</string>
     <string name="toggleWifiAp">Portable Wi-Fi hotspot</string>
@@ -2991,7 +2988,7 @@ found in the list of installed applications.</string>
     <!-- Widget Picker -->
     <string name="widget_count">(%d widgets)</string>
 
-    <string name="cm_settings_title">CyanogenMod settings</string>
+    <string name="cm_settings_title">Cos settings</string>
 
     <string name="wimax_settings">4G settings</string>
     <string name="wimax_settings_summary">Set up &amp; manage 4G network and modem</string>
