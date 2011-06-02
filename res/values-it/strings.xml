@@ -545,10 +545,6 @@
     <string name="device_info_settings" msgid="475872867864762157">"Stato telefono"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Aggiornamenti sistema"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
-    <!-- About phone screen, status item label -->
-    <string name="cpu_info">Info CPU</string>
-    <!-- About phone screen, status item label -->
-    <string name="mem_info">Info Mem (libera/totale)</string>
     <string name="firmware_version" msgid="4801135784886859972">"Versione di Android"</string>
     <string name="model_number" msgid="3765737700545384794">"Numero modello"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versione banda di base"</string>
@@ -1434,7 +1430,7 @@
     <!-- Widget Picker -->
     <string name="widget_count">(%d widget)</string>
 
-    <string name="cm_settings_title">CyanogenMod</string>
+    <string name="cm_settings_title">COS</string>
     <string name="wimax_settings" msgid="1574837328738396794">"Impostazioni 4G"</string>
     <string name="wimax_settings_summary" msgid="3207355006084135453">"Imposta e gestisci rete e modem 4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"Indirizzo MAC 4G"</string>

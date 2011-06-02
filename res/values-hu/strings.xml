@@ -1175,8 +1175,6 @@
     <string name="notification_always_on_summary">Engedélyezi a jelzőfényt bekapcsolt képernyőnél</string>
     <string name="notification_charging_title">Töltés jelzőfény</string>
     <string name="notification_charging_summary">Engedélyezi a sárga jelzőfényt töltés közben</string>
-    <string name="cpu_info">CPU infó</string>
-    <string name="mem_info">Mem infó (elérh/összes)</string>
     <string name="mod_version">Mod</string>
     <string name="mod_version_default">Ismeretlen</string>
     <string name="service_client_name">%1$s: érintse meg a kezeléshez</string>
@@ -1308,7 +1306,7 @@
     <string name="notConfigured">Nincs beállítva. Kérem próbálja újra</string>
     <string name="ok">OK</string>
     <string name="widget_count">(%d widgetek)</string>
-    <string name="cm_settings_title">CyanogenMod beállítások</string>
+    <string name="cm_settings_title">COS beállítások</string>
     <string name="wimax_settings" msgid="1574837328738396794">"4G beállítások"</string>
     <string name="wimax_settings_summary" msgid="3207355006084135453">"4G hálózat és modem beállítása és kezelése"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC-cím"</string>

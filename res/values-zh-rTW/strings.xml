@@ -1262,10 +1262,7 @@
     <!-- About phone screen, list item summary.  Takes the user to the screen for seeing and installing system updates. -->
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
 
-    <!-- About phone screen, status item label -->
-    <string name="cpu_info">CPU 資訊</string>
-    <!-- About phone screen, status item label -->
-    <string name="mem_info">記憶體資訊（可用／總計）</string>
+    
     <!-- About phone screen, status item label -->
     <string name="firmware_version" msgid="4801135784886859972">"Android 版本"</string>
     <!-- About phone screen, status item label-->
@@ -2947,7 +2944,7 @@
     <!-- Widget Picker -->
     <string name="widget_count">（%d 個小工具）</string>
 
-    <string name="cm_settings_title">CyanogenMod 設定</string>
+    <string name="cm_settings_title">COS 設定</string>
 
     <string name="wimax_settings" msgid="1574837328738396794">"4G 設定"</string>
     <string name="wimax_settings_summary" msgid="3207355006084135453">"設定與管理 4G 網路及數據機"</string>

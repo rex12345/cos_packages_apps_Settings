@@ -1164,10 +1164,9 @@
     <!-- Added for CM -->
     <string name="mod_version">"Modバージョン"</string>
     <string name="mod_version_default">"不明"</string>
-    <string name="cm_settings_title">CyanogenMod設定</string>
+    <string name="cm_settings_title">COS設定</string>
     <string name="adb_notify">"USBデバッグを通知する"</string>
-    <string name="cpu_info">CPU情報</string>
-    <string name="mem_info">メモリ情報(空き/トータル)</string>
+    
 
     <string name="adb_notify_summary">"USBデバッグが接続されたら通知を表示する"</string>
     <string name="kill_app_longpress_back">"長押しでアプリを終了"</string>
