@@ -67,10 +67,6 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
 
     private static final String MEMORY_SD_GROUP = "memory_sd";
 
-    private static final String SDEXT_SIZE = "sdext_size";
-
-    private static final String SDEXT_AVAIL = "sdext_avail"; 
-
     private static final String MEMORY_ADDITIONAL_CATEGORY = "memory_additional_category";
 
     private static final String MEMORY_ADDITIONAL_SIZE = "memory_additional_size";
@@ -90,9 +86,6 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     private PreferenceGroup mSdMountPreferenceGroup;
 
     boolean mSdMountToggleAdded = true;
-
-    private Preference mSdExtSize;
-    private Preference mSdExtAvail;
 
     private Preference mIntSize;
     private Preference mIntAvail;
@@ -138,13 +131,9 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
         formatToggles.put(MEMORY_SD_FORMAT + sdPath, sdPath);
         mSdMountPreferenceGroup = (PreferenceGroup)findPreference(MEMORY_SD_GROUP);
 
-        mSdExtSize = findPreference(SDEXT_SIZE);
-        mSdExtAvail = findPreference(SDEXT_AVAIL); 
-
         mIntSize = findPreference(MEMORY_INTERNAL_SIZE);
         mIntAvail = findPreference(MEMORY_INTERNAL_AVAIL);
 
-   
         for (String path: getAdditionalVolumePaths()) {
             PreferenceCategory category = new PreferenceCategory(this);
             category.setKey(MEMORY_ADDITIONAL_CATEGORY + path);
@@ -425,34 +414,14 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
                 status.equals(Environment.MEDIA_NOFS) ||
                 status.equals(Environment.MEDIA_UNMOUNTABLE) ) {
                 mount.setEnabled(true);
+                mount.setTitle(R.string.sd_mount);
                 mount.setSummary(R.string.sd_mount_summary);
             } else {
                 mount.setEnabled(false);
+                mount.setTitle(R.string.sd_mount);
                 mount.setSummary(R.string.sd_insert_summary);
             }
-            mount.setTitle(R.string.sd_mount); 
         }
-       
-boolean SdExtUnMounted = SystemProperties.get("magpie.a2sd.active", "0").equals("0");
-            if (SdExtUnMounted) {  
-                mSdExtSize.setSummary(R.string.sd_unavailable);
-                mSdExtAvail.setSummary(R.string.sd_unavailable);
-            } else { 
-               try {
-                    File path = Environment.getSdExtDirectory();
-                    StatFs stat = new StatFs(path.getPath());
-                    long blockSize = stat.getBlockSize();
-                    long totalBlocks = stat.getBlockCount();
-                    long availBlocks = stat.getAvailableBlocks();
-
-                    mSdExtSize.setSummary(formatSize(totalBlocks * blockSize));
-                    mSdExtAvail.setSummary(formatSize(availBlocks * blockSize));                
-            }catch (IllegalArgumentException e) {
-            // this can occur if the SD card is removed, but we haven't received the
-           // ACTION_MEDIA_REMOVED Intent yet.
-                    status = Environment.MEDIA_REMOVED;
-                    }
-                   }  
 
         for (String path: getAdditionalVolumePaths()) {
             size = findPreference(MEMORY_ADDITIONAL_SIZE + path);
