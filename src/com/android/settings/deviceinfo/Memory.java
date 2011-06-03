@@ -430,7 +430,7 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
                 mount.setEnabled(false);
                 mount.setSummary(R.string.sd_insert_summary);
             }
-            mSdMountToggle.setTitle(R.string.sd_mount);
+            mount.setTitle(R.string.sd_mount);
         }
 
         if (sdext.equals(Environment.MEDIA_MOUNTED)) {
