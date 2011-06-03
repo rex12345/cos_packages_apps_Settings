@@ -1338,6 +1338,13 @@
     <string name="sd_memory" product="default">SD card</string>
     <!-- SD card & phone storage settings screen heading. This is displayed above itmes that pertain to the SDExt -->
     <string name="sdext_memory">SD-Ext</string>
+    <!-- error message on setting default install location to sd-ext when sd-ext is dissabled-->
+    <string name="toast_magpie_disabled">ERROR: sd-ext disabled using auto</string>
+    <!-- allow mounting of sd-ext on boot? -->
+    <string name="sd_ext_name">SD-EXT</string>
+    <string name="mount_sd_ext">Attempt to mount sd-ext on boot</string>
+    <string name="data_bind_mount">Data2sd</string>
+    <string name="data_bind_mount_summary">bind /data/data to /sd-ext/app-data</string>
     <!-- SD card & phone storage settings title. The amount of free space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section. -->
     <string name="memory_available">Available space</string>
     <!-- SD card & phone storage settings screen heading.  The total amount of storage space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section -->
@@ -1755,9 +1762,9 @@
  these applications.</string>
     <!--zswap settings-->
     <string name="zswap_appram_enable">CompCache</string>
-    <string name="zswap_appram_off">Enable 20Mb CompCache</string>
+    <string name="zswap_appram_off">Enable 20MB CompCache</string>
     <!-- the * will be replaced by the number of Mb-->
-    <string name="zswap_appram_on">Disable *Mb CompCache</string>
+    <string name="zswap_appram_on">Currently *MB of CompCache is enabled</string>
     <!-- Manage applications, individual application info screen title. For example, if they click on "Browser" in "Manage applications", the title of the next screen will be this -->
     <string name="application_info_label">Application info</string>
     <!-- Manage applications, individual application info screen, section heading for stuff relating to an app's storage settings. -->

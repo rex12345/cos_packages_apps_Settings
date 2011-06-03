@@ -40,12 +40,16 @@ public class DevelopmentSettings extends PreferenceActivity
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
+    private static final String MOUNT_SD_EXT="mount_sd_ext";
+    private static final String DATA_BIND_MOUNT="data_bind_mount";    
 
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mAdbNotify;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mAllowMockLocation;
     private CheckBoxPreference mKillAppLongpressBack;
+    private CheckBoxPreference mMountSDExt;
+    private CheckBoxPreference mDataBindMount;
 
     // To track whether Yes was clicked in the adb warning dialog
     private boolean mOkClicked;
@@ -63,6 +67,8 @@ public class DevelopmentSettings extends PreferenceActivity
         mKeepScreenOn = (CheckBoxPreference) findPreference(KEEP_SCREEN_ON);
         mAllowMockLocation = (CheckBoxPreference) findPreference(ALLOW_MOCK_LOCATION);
         mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
+        mMountSDExt = (CheckBoxPreference) findPreference(MOUNT_SD_EXT);
+        mDataBindMount = (CheckBoxPreference) findPreference(DATA_BIND_MOUNT);
     }
 
     @Override
@@ -81,6 +87,10 @@ public class DevelopmentSettings extends PreferenceActivity
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         mKillAppLongpressBack.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
+        mMountSDExt.setChecked(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
++        mDataBindMount.setEnabled(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
+
++        mDataBindMount.setChecked(SystemProperties.get("ro.vold.data2sdext","0").equals("1"));
     }
 
     @Override
@@ -118,6 +128,11 @@ public class DevelopmentSettings extends PreferenceActivity
         } else if (preference == mKillAppLongpressBack) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK,
                     mKillAppLongpressBack.isChecked() ? 1 : 0);
+        } else if (preference == mMountSDExt) {
+            SystemProperties.set("ro.vold.sdextonboot",mMountSDExt.isChecked() ? "1" : "0");
+            mDataBindMount.setEnabled(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
+        } else if (preference == mDataBindMount) {
+            SystemProperties.set("ro.vold.data2sdext",mDataBindMount.isChecked() ? "1" : "0");
         }
 
         return false;

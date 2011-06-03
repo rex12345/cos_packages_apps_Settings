@@ -27,6 +27,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
+import android.widget.Toast;
+import android.content.Context
 import android.os.SystemProperties;
 import android.util.Log;
 
@@ -136,8 +138,20 @@ public class ApplicationSettings extends PreferenceActivity implements
                     Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_DEVICE);
         } else if ((APP_INSTALL_SDEXT_ID.equals(value)) &&
                    (android.os.Environment.IsSdExtMounted())) {
-            Settings.System.putInt(getContentResolver(),
+            if(SystemProperties.get("magpie.a2sd.active","0").equals("1")){
+                Settings.System.putInt(getContentResolver(),
                     Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_SDEXT);
+            } else {
+                Context context = getApplicationContext();
+                Toast toast = Toast.makeText(context,
+                    context.getString(R.string.toast_magpie_disabled),
+                    Toast.LENGTH_SHORT);
+                toast.show();
+                Settings.System.putInt(getContentResolver(),
+                    Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
+                mInstallLocation.setValue(APP_INSTALL_AUTO_ID);
+                return;
+            }
         } else if (APP_INSTALL_SDCARD_ID.equals(value)) {
             Settings.System.putInt(getContentResolver(),
                     Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_SDCARD);

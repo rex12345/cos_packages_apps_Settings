@@ -54,4 +54,14 @@
         android:inputType="text"
         android:persistent="false" />
 
+    <CheckBoxPreference
+        android:key="mount_sd_ext"
+        android:title="@string/sd_ext_name"
+        android:summary="@string/mount_sd_ext"/>
+
+    <CheckBoxPreference
+        android:key="data_bind_mount"
+        android:title="@string/data_bind_mount"
+        android:summary="@string/data_bind_mount_summary"/>
+
 </PreferenceScreen>
