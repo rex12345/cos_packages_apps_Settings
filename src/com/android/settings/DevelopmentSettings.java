@@ -88,9 +88,8 @@ public class DevelopmentSettings extends PreferenceActivity
         mKillAppLongpressBack.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
         mMountSDExt.setChecked(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
-+        mDataBindMount.setEnabled(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
-
-+        mDataBindMount.setChecked(SystemProperties.get("ro.vold.data2sdext","0").equals("1"));
+        mDataBindMount.setEnabled(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
+        mDataBindMount.setChecked(SystemProperties.get("ro.vold.data2sdext","0").equals("1"));
     }
 
     @Override
