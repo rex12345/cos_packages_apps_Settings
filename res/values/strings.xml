@@ -1336,6 +1336,8 @@
     <string name="sd_memory" product="nosdcard">USB storage</string>
     <!-- SD card & phone storage settings screen heading. This is displayed above items that pertain to the SD card -->
     <string name="sd_memory" product="default">SD card</string>
+    <!-- SD card & phone storage settings screen heading. This is displayed above itmes that pertain to the SDExt -->
+    <string name="sdext_memory">SD-Ext</string>
     <!-- SD card & phone storage settings title. The amount of free space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section. -->
     <string name="memory_available">Available space</string>
     <!-- SD card & phone storage settings screen heading.  The total amount of storage space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section -->
@@ -1345,7 +1347,7 @@
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=30] -->
     <string name="sd_eject_summary" product="nosdcard">Unmount the internal USB storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
-    <string name="sd_eject_summary" product="default">Unmount the SD card so you can safely remove it</string>
+    <string name="sd_eject_summary" product="default">Unmount the SD card.\nDo not eject SD card!</string>
 
     <!-- SD card & phone storage settings item summary that is displayed when no SD card is inserted.  This version of the string can probably never come up on current hardware. [CHAR LIMIT=25] -->
     <string name="sd_insert_summary" product="nosdcard">Insert USB storage for mounting</string>
@@ -1380,7 +1382,7 @@
     <!-- SD card eject confirmation dialog  [CHAR LIMIT=NONE] -->
     <string name="dlg_confirm_unmount_text" product="nosdcard">If you unmount the USB storage, some applications you are using will stop and may be unavailable until you remount the USB storage.</string>
     <!-- SD card eject confirmation dialog  -->
-    <string name="dlg_confirm_unmount_text" product="default">If you unmount the SD card, some applications you are using will stop and may be unavailable until you remount the SD card.</string>
+    <string name="dlg_confirm_unmount_text">If you unmount the SD card, some applications you are using will stop and may be unavailable until you remount the SD card. If you have any applications on SD-Ext DO NOT eject the card.</string>
     <!-- SD card eject error dialog title   [CHAR LIMIT=30] -->
     <string name="dlg_error_unmount_title" product="nosdcard">Unmounting USB storage failed</string>
     <!-- SD card eject error dialog title   -->

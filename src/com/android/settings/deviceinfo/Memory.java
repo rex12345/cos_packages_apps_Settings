@@ -67,6 +67,10 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
 
     private static final String MEMORY_SD_GROUP = "memory_sd";
 
+    private static final String SDEXT_SIZE = "sdext_size";
+
+    private static final String SDEXT_AVAIL = "sdext_avail";
+
     private static final String MEMORY_ADDITIONAL_CATEGORY = "memory_additional_category";
 
     private static final String MEMORY_ADDITIONAL_SIZE = "memory_additional_size";
@@ -86,6 +90,9 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     private PreferenceGroup mSdMountPreferenceGroup;
 
     boolean mSdMountToggleAdded = true;
+
+    private Preference mSdExtSize;
+    private Preference mSdExtAvail;
 
     private Preference mIntSize;
     private Preference mIntAvail;
@@ -130,6 +137,9 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
         findPreference(MEMORY_SD_FORMAT).setKey(MEMORY_SD_FORMAT + sdPath);
         formatToggles.put(MEMORY_SD_FORMAT + sdPath, sdPath);
         mSdMountPreferenceGroup = (PreferenceGroup)findPreference(MEMORY_SD_GROUP);
+
+        mSdExtSize = findPreference(SDEXT_SIZE);
+        mSdExtAvail = findPreference(SDEXT_AVAIL);
 
         mIntSize = findPreference(MEMORY_INTERNAL_SIZE);
         mIntAvail = findPreference(MEMORY_INTERNAL_AVAIL);
@@ -356,6 +366,7 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
 
     private void updateMemoryStatus() {
         String status = Environment.getExternalStorageState();
+        String sdext = Environment.getSdExtState();
         String readOnly = "";
         Preference mount = findPreference(MEMORY_SD_MOUNT_TOGGLE + sdPath);
         Preference format = findPreference(MEMORY_SD_FORMAT + sdPath);
@@ -414,13 +425,32 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
                 status.equals(Environment.MEDIA_NOFS) ||
                 status.equals(Environment.MEDIA_UNMOUNTABLE) ) {
                 mount.setEnabled(true);
-                mount.setTitle(R.string.sd_mount);
                 mount.setSummary(R.string.sd_mount_summary);
             } else {
                 mount.setEnabled(false);
-                mount.setTitle(R.string.sd_mount);
                 mount.setSummary(R.string.sd_insert_summary);
             }
+            mSdMountToggle.setTitle(R.string.sd_mount);
+        }
+
+        if (sdext.equals(Environment.MEDIA_MOUNTED)) {
+            try {
+                File path = Environment.getSdExtDirectory();
+                StatFs stat = new StatFs(path.getPath());
+                long blockSize = stat.getBlockSize();
+                long totalBlocks = stat.getBlockCount();
+                long availBlocks = stat.getAvailableBlocks();
+
+                mSdExtSize.setSummary(formatSize(totalBlocks * blockSize));
+                mSdExtAvail.setSummary(formatSize(availBlocks * blockSize));
+            } catch (IllegalArgumentException e) {
+                // this can occur if the SD card is removed, but we haven't received the
+                // ACTION_MEDIA_REMOVED Intent yet.
+                sdext = Environment.MEDIA_REMOVED;
+            }
+        } else {
+            mSdExtSize.setSummary(R.string.sd_unavailable);
+            mSdExtAvail.setSummary(R.string.sd_unavailable);
         }
 
         for (String path: getAdditionalVolumePaths()) {
