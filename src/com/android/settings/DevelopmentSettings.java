@@ -87,9 +87,12 @@ public class DevelopmentSettings extends PreferenceActivity
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         mKillAppLongpressBack.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
-        mMountSDExt.setChecked(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
-        mDataBindMount.setEnabled(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
-        mDataBindMount.setChecked(SystemProperties.get("ro.vold.data2sdext","0").equals("1"));
+        mMountSDExt.setChecked(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.XVOLD_STATUS, 0) = 1); 
+        mDataBindMount.setEnabled(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.XVOLD_DDBIND, 0) = 1);  
+        mDataBindMount.setChecked(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.XVOLD_DDBIND, 0) = 1);   
     }
 
     @Override
@@ -128,10 +131,13 @@ public class DevelopmentSettings extends PreferenceActivity
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK,
                     mKillAppLongpressBack.isChecked() ? 1 : 0);
         } else if (preference == mMountSDExt) {
-            SystemProperties.set("ro.vold.sdextonboot",mMountSDExt.isChecked() ? "1" : "0");
-            mDataBindMount.setEnabled(SystemProperties.get("ro.vold.sdextonboot","0").equals("1"));
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.XVOLD_STATUS,
+                    mMountSDExt.isChecked() ? 1 : 0);
+            mDataBindMount.setEnabled(getContentResolver(), Settings.Secure.XVOLD_STATUS,
+                    Settings.Secure.XVOLD_STATUS, 0) = 1);
         } else if (preference == mDataBindMount) {
-            SystemProperties.set("ro.vold.data2sdext",mDataBindMount.isChecked() ? "1" : "0");
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.XVOLD_DDBIND,
+                    mDataBindMount.isChecked() ? 1 : 0);
         }
 
         return false;
