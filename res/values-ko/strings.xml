@@ -1161,7 +1161,6 @@
     <string name="sound_category_notification_title" msgid="3502115998790286943">"알림"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"반응"</string>
 
-    <string name="launcher_settings_title">ADW런처</string>
 
     <string name="possibleButtons">가능한 버튼</string>
     <string name="toggleWifi">와이파이</string>
@@ -1250,7 +1249,6 @@
     <string name="adb_notify">USB 디버깅 알림</string>
     <string name="adb_notify_summary">USB 디버깅이 연결되었을 때 알림을 표시합니다.</string>
        <!-- About phone screen, status item label -->
-    <string name="mem_info">메모리 정보 (사용 가능 / 전체)</string>
     <string name="mod_version">Mod 버전</string>
     <string name="mod_version_default">알 수 없음</string>
 

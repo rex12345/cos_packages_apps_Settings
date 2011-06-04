@@ -1168,8 +1168,7 @@
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Powiadomienia"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"Reakcje"</string>
     
-    <string name="launcher_settings_title">ADWLauncher</string>
-
+    
     <string name="possibleButtons">Dostępne przyciski</string>
     <string name="toggleWifi">Wi-Fi</string>
     <string name="toggleWifiAp">Przenośny hotspot Wi-Fi</string>

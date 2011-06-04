@@ -1264,7 +1264,6 @@
     <string name="sound_category_calls_title" msgid="3688531959256239012">"Вхідні дзвінки"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Сповіщення"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"Відгук"</string>
-    <string name="launcher_settings_title">ADWLauncher</string>
     <string name="possibleButtons">Можливі кнопки</string>
     <string name="toggleWifi">Wi-Fi</string>
     <string name="toggleWifiAp">Точка доступу Wi-Fi</string>

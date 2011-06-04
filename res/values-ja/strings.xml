@@ -1171,8 +1171,7 @@
     <string name="adb_notify_summary">"USBデバッグが接続されたら通知を表示する"</string>
     <string name="kill_app_longpress_back">"長押しでアプリを終了"</string>
     <string name="kill_app_longpress_back_summary">"戻るボタンを長押しすることでフォアグラウンドアプリケーションを終了させる"</string>
-    <string name="launcher_settings_title">ADWLauncher</string>
-
+ 
     <!-- Display settings screen, notification light repeat blinking title -->
     <string name="notification_blink_title">"通知ライトを点滅させる"</string>
     <!-- Display settings screen, notification light repeat blinking summary -->

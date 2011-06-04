@@ -28,7 +28,7 @@ import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.widget.Toast;
-import android.content.Context
+import android.content.Context;
 import android.os.SystemProperties;
 import android.util.Log;
 

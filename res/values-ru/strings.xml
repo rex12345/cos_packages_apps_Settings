@@ -1172,8 +1172,6 @@
     <string name="mod_version">Версия COS</string>
     <string name="mod_version_default">Неизвестно</string>
 	
-    <string name="launcher_settings_title">Настройки ADWLauncher</string>
-
     <string name="possibleButtons">Возможные кнопки</string>
     <string name="toggleWifi">Wi-Fi</string>
     <string name="toggleWifiAp">Wi-Fi точка доступа</string>

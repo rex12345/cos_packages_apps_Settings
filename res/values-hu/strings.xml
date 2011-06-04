@@ -1231,7 +1231,6 @@
     <string name="vpn_openvpn_set_keysize_message">Hagyja üresen, hogy a titkosítás-specifikus alapértelmezettet használja</string>
     <string name="vpn_openvpn_set_extra">További argumentumok</string>
     <string name="vpn_openvpn_set_extra_message">Adjon meg további parancssori argumentumokat</string>
-    <string name="launcher_settings_title">ADWLauncher</string>
     <string name="possibleButtons">Lehetséges gombok</string>
     <string name="toggleWifi">Wi-Fi</string>
     <string name="toggleWifiAp">Hordozható Wi-Fi hotspot</string>
