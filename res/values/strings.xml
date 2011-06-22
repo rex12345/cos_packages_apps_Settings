@@ -3002,4 +3002,8 @@ found in the list of installed applications.</string>
     from their cell phone carrier. The use of the string is similar to the string
     "system_update_settings_list_item_title" in this project. [CHAR LIMIT=25] -->
     <string name="additional_system_update_settings_list_item_title">Additional system updates</string>
+
+    <!-- su update override -->
+    <string name="allow_su_updates">Update Superuser</string>
+    <string name="allow_su_updates_summary">Allow Superuser and related apps until reboot</string>
 </resources>
