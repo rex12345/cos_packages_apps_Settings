@@ -36,11 +36,8 @@ public class DevelopmentSettings extends PreferenceActivity
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
     private static final String ENABLE_ADB = "enable_adb";
-
     private static final String ADB_NOTIFY = "adb_notify";
-
     private static final String ALLOW_SU_UPDATES = "allow_su_updates";
-
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
@@ -48,11 +45,8 @@ public class DevelopmentSettings extends PreferenceActivity
     private static final String DATA_BIND_MOUNT="data_bind_mount";    
 
     private CheckBoxPreference mEnableAdb;
-
     private CheckBoxPreference mAdbNotify;
-
     private CheckBoxPreference mAllowSuUpdates;
-
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mAllowMockLocation;
     private CheckBoxPreference mKillAppLongpressBack;
@@ -85,16 +79,13 @@ public class DevelopmentSettings extends PreferenceActivity
         super.onResume();
 
         mEnableAdb.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ADB_ENABLED, 0) != 0);
-        
+                Settings.Secure.ADB_ENABLED, 0) != 0);        
         mAdbNotify.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ADB_NOTIFY, 1) != 0);
-                
+                Settings.Secure.ADB_NOTIFY, 1) != 0);                
         mKeepScreenOn.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         mAllowMockLocation.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
-
         mKillAppLongpressBack.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
         mMountSDExt.setChecked(SystemProperties.get("persist.sys.sdextonboot","0").equals("1"));
